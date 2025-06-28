@@ -22,11 +22,11 @@
                 {% elif page.summary %}
                     {{ page.summary | safe }}&hellip;
                 {% else %}
-                    {% set hide_read_more = true %}
+                    {{ page.content | striptags | truncate(length=150) }}
                 {% endif %}
             </div>
 
-            {% if not hide_read_more %}
+            {% if not hide_read_more and (page.description or page.summary or page.content) %}
                 <a class="readmore" href={{ page.permalink }}>Read more ⟶</a>
             {% endif %}
         </section>
