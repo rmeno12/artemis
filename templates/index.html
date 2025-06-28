@@ -1,1 +1,17 @@
-{% extends "section.html" %}
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+    {{ post_macros::content(page=section) }}
+
+    {% set posts_section = get_section(path="posts/_index.md") %}
+    {% set projects_section = get_section(path="projects/_index.md") %}
+    {% set links_section = get_section(path="posts/links/_index.md") %}
+    
+    {% set all_pages = posts_section.pages | concat(with=projects_section.pages) | concat(with=links_section.pages) | sort(attribute="date") | reverse %}
+
+    <main class="list">
+        {{ post_macros::list_posts(pages=all_pages | slice(end=5)) }}
+    </main>
+
+{% endblock main_content %}
