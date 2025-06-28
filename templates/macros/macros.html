@@ -45,7 +45,7 @@
                 :: tags:&nbsp;
                 {%- set sep = "&nbsp;" -%}
             {% endif -%}
-            {%- for tag in page.taxonomies.tags %}
+            {%- for tag in page.taxonomies.tags | sort %}
                 <a class="post-tag" href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}">#{{ tag }}</a>
                 {%- if not loop.last %}{{ sep | safe }}{% endif -%}
             {% endfor -%}
@@ -126,7 +126,7 @@
             <div class="post-tags">
                 <nav class="nav tags">
                     <ul class="tags">
-                        {% for tag in page.taxonomies.tags %}
+                        {% for tag in page.taxonomies.tags | sort %}
                             <li><a href={{ get_taxonomy_url(kind='tags', name=tag) | safe }}>{{ tag }}</a></li>
                         {% endfor %}
                     </ul>
